@@ -1,0 +1,25 @@
+Brayden Roth-White
+brayden.roth-white@wsu.edu
+11388543
+
+Files included:
+	       LUdecomp.c
+	       LUdecomp.h
+	       homography.c
+	       makefile
+	       README
+	       hmap.c
+
+To run the program decompress the program and simply type 'make' in the 
+terminal of the same directory.  All in the makefile is set up to take care
+of all the compilations. 
+
+Example of run: 
+./homography < boxtop.in | ./hmap cheerios-small.ppm 500 650 > face.ppm
+
+Above boxtop.in are the coordinates and cheerios-small.ppm is the original 
+image to be transposed and the resulting ppm is face.ppm
+
+This program takes an image as input and uses homography to transpose the 
+angle of the image by running it through an LU decomposition with coordinates
+given (as seen in boxtop.in).   

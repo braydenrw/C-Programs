@@ -1,0 +1,12 @@
+Brayden Roth-White
+ID: 11388543
+brayden.roth-white@wsu.edu
+
+Pi.c give 4 different estimates of pi using 4 different rules as follow:
+Trapezoid Rule
+Simpsons 1/3 Rule
+Simpsons 3/8 Rule
+Boole's Rule
+
+Output provides n followed by the trapezoid error, then simpsons 1/3 error,
+then simspons 3/8 error, then booles error for several n values.  

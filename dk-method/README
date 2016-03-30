@@ -1,0 +1,13 @@
+Brayden Roth-White
+brayden.roth-white@wsu.edu
+Durand-Kerner Method
+
+Compile with the line gcc -g -std=c99 -Wall dk.c -o dk -lm
+Input takes a file with numbers in the following order:
+-5 0
+3 0
+-3 0
+In a plain text file that will be given to the function.
+Run with the line ./dk < example.txt
+
+This function finds the complex roots of an nth degree polynomial.
