@@ -31,6 +31,8 @@ int randomGaussian_r(int mean, int stddev, unsigned int* state) {
 		return (int) floor(mu + sigma * sin(f2) * f1);
 }
 
+/*  The two functions below grab a random think/eat time  */
+
 void getRandThink(int *thinkTime, unsigned int *seed) {
 	if((*thinkTime = randomGaussian_r(T_MEAN, T_STDEV, seed)) < 0) {
 		*thinkTime = 0;
@@ -43,6 +45,9 @@ void getRandEat(int *eatTime, unsigned int *seed) {
 	}
 }
 
+/*  Function alerts stdout if a philosopher is thinking and how long
+	he will think  */
+
 void think(int *totalTime, int thinkTime, int philoID) {
 	int temp = *(int*)totalTime;
 	printf("Philo %d will think for %d seconds (%d seconds total)\n",
@@ -52,6 +57,9 @@ void think(int *totalTime, int thinkTime, int philoID) {
 	sleep(thinkTime);
 }
 
+/*  Function alerts stdout if a philosopher is eating and how long
+	he will eat  */
+
 void eat(int *totalTimeToEat, int eatTime, int philoID) {
 	int temp = *(int*)totalTimeToEat;
 	printf("Philo %d will eat for %d seconds (%d seconds total)\n",
@@ -60,6 +68,9 @@ void eat(int *totalTimeToEat, int eatTime, int philoID) {
 	*totalTimeToEat -= eatTime;
 	sleep(eatTime);
 }
+
+/*  Function passed in on the creation of each thread, starts the 
+	philosopher off thinking then trys to grab chopsticks and eat  */
 
 void *philoCommand(void *num) {
 	int philoID = *(int*)num;
@@ -71,7 +82,7 @@ void *philoCommand(void *num) {
 	int leftStick = philoID;
 	int rightStick = (philoID + 1) % PHILOSOPHERS;
 
-	while(totalTimeToEat > 0) {
+	while(totalTimeToEat > 0) { // Once totalTimeToEat expires philosopher may leave
 		getRandThink(&thinkTime, &seed);
 		think(&totalTime, thinkTime, philoID);
 		if(pthread_mutex_trylock(&sticks[leftStick]) != EBUSY) {
@@ -98,7 +109,7 @@ void *philoCommand(void *num) {
 int main(int argc, char **argv) {
 	int params[PHILOSOPHERS][(int)sizeof(int)];
 
-	for(int i = 0; i < CHOPSTICKS; i++) {
+	for(int i = 0; i < CHOPSTICKS; i++) { 
 		pthread_mutex_init(&sticks[i], NULL);
 	}
 	for(int i = 0; i < PHILOSOPHERS; i++) {
